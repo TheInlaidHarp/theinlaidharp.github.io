@@ -554,30 +554,53 @@ header .go-back i {
     /* background-color: rgba(9, 94, 176, 0.75) */
     /* -webkit-animation: rainbow 60s infinite;
     animation: rainbow 60s infinite; */
+
     /* 修改渐变配置，首尾颜色一致 */
     background: linear-gradient(90deg,
-        rgba(255, 0, 0, .65) 0%,
         /* 红 */
-        rgba(255, 127, 0, .65) 16.6%,
+        rgba(255, 0, 0, 1) 0%,
         /* 橙 */
-        rgba(255, 255, 0, .65) 33.3%,
+        rgba(255, 127, 0, 1) 10%,
         /* 黄 */
-        rgba(0, 255, 0, .65) 50%,
+        rgba(255, 255, 0, 1) 20%,
         /* 绿 */
-        rgba(0, 0, 255, .65) 66.6%,
+        rgba(0, 255, 0, 1) 30%,
+        /* 青 */
+        rgba(0, 255, 255, 1) 40%,
         /* 蓝 */
-        rgba(75, 0, 130, .65) 83.3%,
+        rgba(0, 0, 255, 1) 50%,
+        /* 屏幕靛 */
+        /* rgba(102, 0, 255, 1) 0%, */
         /* 靛 */
-        rgba(139, 0, 255, .65) 94%,
+        rgba(75, 0, 130, 1) 60%,
         /* 紫 */
-        rgba(255, 0, 0, .65) 100%
-        /* 红（闭合循环） */
+        rgba(139, 0, 255, 1) 70%,
+        /* 洋红 */
+        rgba(255, 0, 255, 1) 80%,
+        /* 红 */
+        rgba(255, 0, 0, 1) 90%,
+        /* 橙（闭合循环） */
+        rgba(255, 127, 0, 1) 100%
     );
-    background-size: 800% 100%;
-        /* 调整为 8 倍宽度 */
-    /* background-size: 700% 100%; */
-    animation: rainbow 60s linear infinite;
-    -webkit-animation: rainbow 60s linear infinite;
+    /* 调整为 11 倍宽度 */
+    background-size: 1100% 100%;
+    animation: rainbow 30s linear infinite;
+    -webkit-animation: rainbow 30s linear infinite;
+    /* background: linear-gradient(90deg,
+        #FF0000 0%,
+        #FF7F00 14.28%,
+        #FFFF00 28.57%,
+        #00FF00 42.85%,
+        #00FFFF 57.14%,
+        #0000FF 71.42%,
+        #4B0082 85.71%,
+        #FF00FF 100%
+    );
+    background-size: 700% 100%;
+    animation: rainbow 30s linear infinite;
+    will-change: background-position;
+    transform: translateZ(0);
+    mix-blend-mode: screen; */
 }
 
 
@@ -716,7 +739,7 @@ header .go-back i {
     }
 
     100% {
-        background-position: 200% 50%;
+        background-position: 100% 50%;
     }
 }
 
@@ -726,7 +749,7 @@ header .go-back i {
     }
 
     100% {
-        background-position: 200% 50%;
+        background-position: 100% 50%;
     }
 }
 
