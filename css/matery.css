@@ -580,25 +580,6 @@ header .go-back i {
     -webkit-animation: rainbow 60s linear infinite;
 }
 
-@keyframes rainbow {
-    0% {
-        background-position: 0% 50%;
-    }
-
-    100% {
-        background-position: 200% 50%;
-    }
-}
-
-@-webkit-keyframes rainbow {
-    0% {
-        background-position: 0% 50%;
-    }
-
-    100% {
-        background-position: 200% 50%;
-    }
-}
 
 .bg-cover:before,
 .bg-cover:after {
@@ -729,6 +710,25 @@ header .go-back i {
         background: -webkit-linear-gradient(135deg, rgba(233, 186, 309, 0.75) 0%, rgba(233, 186, 30, 0.65) 100%);
     }
 } */
+@keyframes rainbow {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    100% {
+        background-position: 200% 50%;
+    }
+}
+
+@-webkit-keyframes rainbow {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    100% {
+        background-position: 200% 50%;
+    }
+}
 
 .index-card {
     margin-top: -10px;
