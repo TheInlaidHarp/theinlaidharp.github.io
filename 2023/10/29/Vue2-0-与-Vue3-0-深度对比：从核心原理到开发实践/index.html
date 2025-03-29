@@ -4,16 +4,9 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="浅析 ES6 中的箭头函数, 锦瑟 丨 Blog">
-    <meta name="description" content="定义：箭头函数是 ES6 中的表达函数的写法。即：用箭头定义函数 () &amp;#x3D;&amp;gt; a + b
-通常我们定义 JS 中的函数时是这么定义的
-ES5：
-
-function (a) &amp;#123;
-	return a;
-&amp;#125;
-
-">
+    <meta name="keywords" content="Vue2.0 与 Vue3.0 深度对比：从核心原理到开发实践, 锦瑟 丨 Blog">
+    <meta name="description" content="一、架构设计革新1.1 构建工具升级Vue 2.0 主要依赖 Webpack 和 vue-cli，配置复杂度高且构建速度较慢。Vue 3.0 推荐使用 Vite（基于 ES Modules 的构建工具），实现秒级热更新和按需编译。
+# Vu">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -25,7 +18,7 @@ function (a) &amp;#123;
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>浅析 ES6 中的箭头函数 | 锦瑟 丨 Blog</title>
+    <title>Vue2.0 与 Vue3.0 深度对比：从核心原理到开发实践 | 锦瑟 丨 Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -235,12 +228,12 @@ function (a) &amp;#123;
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/22.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/5.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">浅析 ES6 中的箭头函数</h1>
+                    <h1 class="description center-align post-title">Vue2.0 与 Vue3.0 深度对比：从核心原理到开发实践</h1>
                 </div>
             </div>
         </div>
@@ -268,8 +261,16 @@ function (a) &amp;#123;
                                 <span class="chip bg-color">javascript</span>
                             </a>
                         
-                            <a href="/tags/ES6/">
-                                <span class="chip bg-color">ES6</span>
+                            <a href="/tags/Vue/">
+                                <span class="chip bg-color">Vue</span>
+                            </a>
+                        
+                            <a href="/tags/Vite/">
+                                <span class="chip bg-color">Vite</span>
+                            </a>
+                        
+                            <a href="/tags/Webpack/">
+                                <span class="chip bg-color">Webpack</span>
                             </a>
                         
                     </div>
@@ -293,7 +294,7 @@ function (a) &amp;#123;
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2017-02-20
+                    2023-10-29
                 </div>
                 
 
@@ -302,14 +303,14 @@ function (a) &amp;#123;
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1k
+                    984
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    3 分
+                    4 分
                 </div>
                 
 
@@ -327,152 +328,175 @@ function (a) &amp;#123;
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p><strong>定义：箭头函数是 ES6 中的表达函数的写法。即：用箭头定义函数 () &#x3D;&gt; a + b</strong></p>
-<p>通常我们定义 JS 中的函数时是这么定义的</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token constant">ES5</span>：
+                <h2 id="一、架构设计革新"><a href="#一、架构设计革新" class="headerlink" title="一、架构设计革新"></a>一、架构设计革新</h2><h3 id="1-1-构建工具升级"><a href="#1-1-构建工具升级" class="headerlink" title="1.1 构建工具升级"></a>1.1 构建工具升级</h3><p>Vue 2.0 主要依赖 <strong>Webpack</strong> 和 <strong>vue-cli</strong>，配置复杂度高且构建速度较慢。<br>Vue 3.0 推荐使用 <strong>Vite</strong>（基于 ES Modules 的构建工具），实现秒级热更新和按需编译。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># Vue 3.0 项目初始化</span>
+<span class="token function">npm</span> create vite@latest my-vue-app -- <span class="token parameter variable">--template</span> vue<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-<span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">a</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-	<span class="token keyword">return</span> a<span class="token punctuation">;</span>
+<p><strong>优势</strong>：开发服务器启动速度提升 10 倍以上，支持原生 ESM 模块加载。</p>
+<h3 id="1-2-组合式-API（Composition-API）"><a href="#1-2-组合式-API（Composition-API）" class="headerlink" title="1.2 组合式 API（Composition API）"></a>1.2 组合式 API（Composition API）</h3><p>Vue 2.0 的 <strong>Options API</strong> 将逻辑分散在 <code>data</code>、<code>methods</code> 等选项中，大型项目维护困难。<br>Vue 3.0 的 <strong>Composition API</strong> 通过 <code>setup()</code> 函数实现逻辑聚合：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// Vue 3.0 计数器示例</span>
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span> ref<span class="token punctuation">,</span> computed <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">"vue"</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">&#123;</span>
+  <span class="token function">setup</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">const</span> count <span class="token operator">=</span> <span class="token function">ref</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> double <span class="token operator">=</span> <span class="token function">computed</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> count<span class="token punctuation">.</span>value <span class="token operator">*</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">function</span> <span class="token function">increment</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      count<span class="token punctuation">.</span>value<span class="token operator">++</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">return</span> <span class="token punctuation">&#123;</span> count<span class="token punctuation">,</span> double<span class="token punctuation">,</span> increment <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>优势</strong>：逻辑复用率提升 300%，TypeScript 支持更完善。</p>
+<hr>
+<h2 id="二、响应式系统重构"><a href="#二、响应式系统重构" class="headerlink" title="二、响应式系统重构"></a>二、响应式系统重构</h2><h3 id="2-1-核心原理对比"><a href="#2-1-核心原理对比" class="headerlink" title="2.1 核心原理对比"></a>2.1 核心原理对比</h3><table>
+<thead>
+<tr>
+<th>特性</th>
+<th>Vue 2.0（Object.defineProperty）</th>
+<th>Vue 3.0（Proxy）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>数组监听</td>
+<td>需重写原型方法</td>
+<td>原生支持</td>
+</tr>
+<tr>
+<td>动态属性增删</td>
+<td>不支持</td>
+<td>支持</td>
+</tr>
+<tr>
+<td>嵌套对象性能</td>
+<td>递归遍历消耗大</td>
+<td>惰性监听节省 40% 内存</td>
+</tr>
+</tbody></table>
+<p><strong>Proxy 示例</strong>：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> data <span class="token operator">=</span> <span class="token punctuation">&#123;</span> <span class="token literal-property property">a</span><span class="token operator">:</span> <span class="token number">1</span> <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> proxy <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Proxy</span><span class="token punctuation">(</span>data<span class="token punctuation">,</span> <span class="token punctuation">&#123;</span>
+  <span class="token function">get</span><span class="token punctuation">(</span>target<span class="token punctuation">,</span> key<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">track</span><span class="token punctuation">(</span>target<span class="token punctuation">,</span> key<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 依赖收集</span>
+    <span class="token keyword">return</span> target<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token function">set</span><span class="token punctuation">(</span>target<span class="token punctuation">,</span> key<span class="token punctuation">,</span> value<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">trigger</span><span class="token punctuation">(</span>target<span class="token punctuation">,</span> key<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 触发更新</span>
+    target<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">=</span> value<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>性能提升</strong>：10,000 个数据项的更新速度提升 1.5 倍。</p>
+<hr>
+<h2 id="三、生命周期与模板语法演进"><a href="#三、生命周期与模板语法演进" class="headerlink" title="三、生命周期与模板语法演进"></a>三、生命周期与模板语法演进</h2><h3 id="3-1-生命周期钩子变化"><a href="#3-1-生命周期钩子变化" class="headerlink" title="3.1 生命周期钩子变化"></a>3.1 生命周期钩子变化</h3><table>
+<thead>
+<tr>
+<th>Vue 2.0</th>
+<th>Vue 3.0（Composition API）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>beforeCreate</td>
+<td>setup()</td>
+</tr>
+<tr>
+<td>created</td>
+<td>setup()</td>
+</tr>
+<tr>
+<td>beforeMount</td>
+<td>onBeforeMount</td>
+</tr>
+<tr>
+<td>mounted</td>
+<td>onMounted</td>
+</tr>
+<tr>
+<td>beforeDestroy</td>
+<td>onBeforeUnmount</td>
+</tr>
+</tbody></table>
+<p><strong>代码示例</strong>：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> <span class="token punctuation">&#123;</span> onMounted <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">"vue"</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">&#123;</span>
+  <span class="token function">setup</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">onMounted</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+      console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"组件已挂载"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="3-2-模板语法改进"><a href="#3-2-模板语法改进" class="headerlink" title="3.2 模板语法改进"></a>3.2 模板语法改进</h3><ul>
+<li><strong>多根节点支持</strong>：无需外层 <code>&lt;div&gt;</code> 包裹</li>
+</ul>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token comment">&lt;!-- Vue 3.0 --></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>header</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>header</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>main</span><span class="token punctuation">></span></span>&#123;&#123; content &#125;&#125;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>main</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>footer</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>footer</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li><strong>Teleport 组件</strong>：跨 DOM 层级渲染</li>
+</ul>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>teleport</span> <span class="token attr-name">to</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>#modal-container<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">v-if</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>showModal<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>模态框内容<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>teleport</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>应用场景</strong>：全局弹窗、通知栏等需要突破组件层级的元素。</p>
+<hr>
+<h2 id="四、性能优化机制"><a href="#四、性能优化机制" class="headerlink" title="四、性能优化机制"></a>四、性能优化机制</h2><h3 id="4-1-虚拟-DOM-升级"><a href="#4-1-虚拟-DOM-升级" class="headerlink" title="4.1 虚拟 DOM 升级"></a>4.1 虚拟 DOM 升级</h3><ul>
+<li><strong>静态节点提升</strong>：将不变节点提取为常量，减少 diff 计算</li>
+<li><strong>补丁标记（PatchFlag）</strong>：动态节点标记优化，跳过静态对比</li>
+</ul>
+<p><strong>效果</strong>：首次渲染速度提升 200%，更新性能提高 30%。</p>
+<h3 id="4-2-Tree-Shaking-支持"><a href="#4-2-Tree-Shaking-支持" class="headerlink" title="4.2 Tree-Shaking 支持"></a>4.2 Tree-Shaking 支持</h3><p>Vue 3.0 通过模块化设计实现按需加载：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> <span class="token punctuation">&#123;</span> ref<span class="token punctuation">,</span> watch <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">"vue"</span><span class="token punctuation">;</span> <span class="token comment">// 只引入所需 API</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><strong>结果</strong>：基础包体积从 23KB（Vue 2）降至 13KB（Vue 3）。</p>
+<hr>
+<h2 id="五、生态与开发体验提升"><a href="#五、生态与开发体验提升" class="headerlink" title="五、生态与开发体验提升"></a>五、生态与开发体验提升</h2><h3 id="5-1-TypeScript-深度整合"><a href="#5-1-TypeScript-深度整合" class="headerlink" title="5.1 TypeScript 深度整合"></a>5.1 TypeScript 深度整合</h3><p>Vue 3.0 源码完全使用 TypeScript 编写，提供精确的类型推断：</p>
+<pre class="line-numbers language-typescript" data-language="typescript"><code class="language-typescript"><span class="token keyword">interface</span> <span class="token class-name">User</span> <span class="token punctuation">&#123;</span>
+  id<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
+  name<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span>
 
-<span class="token comment">// 输出结果：a</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token keyword">const</span> user <span class="token operator">=</span> <span class="token generic-function"><span class="token function">ref</span><span class="token generic class-name"><span class="token operator">&lt;</span>User<span class="token operator">></span></span></span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span> id<span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span> name<span class="token operator">:</span> <span class="token string">"John"</span> <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>这种写法我们已经习以为常了，但是总感觉这种写法太冗长了，那有没有一种方法用一行代码就能表达清楚的呢？答案当然是：<strong>有！</strong></p>
-<p><strong>在 ES6 中新增加了一种定义函数的方法：箭头函数。写起来简单明了。如下：</strong></p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token constant">ES6</span><span class="token function">：</span>
+<h3 id="5-2-新特性：Suspense-组件"><a href="#5-2-新特性：Suspense-组件" class="headerlink" title="5.2 新特性：Suspense 组件"></a>5.2 新特性：Suspense 组件</h3><p>异步组件加载的统一处理方案：</p>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Suspense</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span> <span class="token attr-name">#default</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>AsyncComponent</span> <span class="token punctuation">/></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span> <span class="token attr-name">#fallback</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span>Loading...<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>Suspense</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<span class="token punctuation">(</span><span class="token parameter">a</span><span class="token punctuation">)</span> <span class="token operator">=></span> a<span class="token punctuation">;</span>
-
-<span class="token comment">// 输出结果：a</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>这样看着是不是就简洁的多了呢，不仅把 function 、 return 关键字省略了，连大括号 小括号都不用写了。有人问了：我都没写 return 关键字，它是怎么知道我要把 a 返回出来呢？那是因为箭头函数默认将箭头后面的代码 return 出来。（注意：这种机制仅限于单行代码）</p>
-<p><strong>那么问题来了，这是一个有参数的函数，而且只有一个参数。如果我要写没有参数或者有多个参数的函数该怎么写呢？</strong></p>
-<p><em>for example:</em></p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token constant">ES5</span>：
-
- <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token punctuation">,</span> b</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
- 	<span class="token keyword">return</span> a <span class="token operator">+</span> b<span class="token punctuation">;</span>
- <span class="token punctuation">&#125;</span>
-
- <span class="token comment">// 输出结果： a + b</span>
-
-
- <span class="token constant">ES6</span><span class="token function">：</span>
-
- <span class="token punctuation">(</span><span class="token parameter">a<span class="token punctuation">,</span> b</span><span class="token punctuation">)</span> <span class="token operator">=></span> a <span class="token operator">+</span> b
-
- <span class="token comment">// 输出结果： a + b</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>只需要在箭头前面加一个括号，在括号里面写上要传入的参数并用逗号将参数分割就行。依然很简洁！</p>
-<p>当然了，这只是最简洁的函数，箭头函数有两种表达格式，一种就是上面的，只包含一个表达式，如果表达式比较复杂怎么办呢？这时就不能再省略 {} 和 return 啦。</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token constant">ES5</span>：
-
-<span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">a</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-	<span class="token keyword">if</span> <span class="token punctuation">(</span>a <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-		<span class="token keyword">return</span> a<span class="token punctuation">;</span>
-	<span class="token punctuation">&#125;</span><span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
-		<span class="token keyword">return</span> <span class="token operator">-</span> a<span class="token punctuation">;</span>
-	<span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span>
-
-<span class="token comment">// 输出结果： a or - a</span>
-
-<span class="token constant">ES6</span>：
-
-<span class="token parameter">a</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
-	<span class="token keyword">if</span> <span class="token punctuation">(</span>a <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-		<span class="token keyword">return</span> a<span class="token punctuation">;</span>
-	<span class="token punctuation">&#125;</span><span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
-		<span class="token keyword">return</span> <span class="token operator">-</span> a<span class="token punctuation">;</span>
-	<span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span>
-
-<span class="token comment">// 输出结果： a or - a</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>这是单个参数的写法，如果是多个参数或者无参数，同样在 &#x3D;&gt; 前面加上 (option1, option2) 就行啦。</p>
-<p>箭头函数中有一种特殊情况： 如果要返回一个对象，那么就要注意，这么写的会报错</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token punctuation">(</span><span class="token parameter">a</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
-  <span class="token literal-property property">name</span><span class="token operator">:</span> TheInlaidHarp<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-
-<span class="token comment">// SyntaxError</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>因为这样写和函数体的 {…} 有语法冲突，所以要改为</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token punctuation">(</span><span class="token parameter">a</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">(</span><span class="token punctuation">&#123;</span> <span class="token literal-property property">name</span><span class="token operator">:</span> TheInlaidHarp <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token comment">// OK</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<p>到这个地方整体看起来箭头函数与之前的函数也没有太大的区别，别急！下面就介绍一下箭头函数与普通的函数最大区别，也就是箭头函数的特性：</p>
-<p>箭头函数对 this 的处理方法与普通的函数是不一样的，我们通过一个例子来理解</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> object <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
-  <span class="token literal-property property">number</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
-
-  <span class="token function-variable function">fn</span><span class="token operator">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>number<span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-
-  <span class="token function-variable function">test</span><span class="token operator">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-      <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">fn</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-
-object<span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token comment">// this.fn is not a function</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>这样写会报错的原因就是：test 函数里面的函数调用的时候 this 是指向全局的。那么怎么才能让这个 this 指向 object 呢？我们来修改一下代码</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> object <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
-  <span class="token literal-property property">number</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
-
-  <span class="token function-variable function">fn</span><span class="token operator">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>number<span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-
-  <span class="token function-variable function">test</span><span class="token operator">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">var</span> _this <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
-
-    <span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-      _this<span class="token punctuation">.</span><span class="token function">fn</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-
-object<span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token comment">// 1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><strong>我们在外部定义一个变量 _this 来保存 this 就 OK 啦！</strong></p>
-<p>我们刚才说过：在箭头函数里面对 this 的处理方法是不一样的，箭头函数的 this 始终指向函数定义的 this ，而非函数调用时的 this 。所以我们将上面的代码用箭头函数表达</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> object <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
-  <span class="token literal-property property">number</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
-
-  <span class="token function-variable function">fn</span><span class="token operator">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>number<span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-
-  <span class="token function-variable function">test</span><span class="token operator">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">fn</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-
-object<span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token comment">// 1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>所以这次的函数执行结果的 this 指向依然是 object;</p>
-<p>但是我们要注意的是：箭头函数里的 this 指向是不会改变指向对象的。我们知道 javascript 中的 call 和 apply 方法可以改变 this 指向，但是这两个方法在箭头函数中是无效的。</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> number <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
-<span class="token keyword">var</span> object <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
-  <span class="token literal-property property">x</span><span class="token operator">:</span> <span class="token number">10</span><span class="token punctuation">,</span>
-
-  <span class="token function-variable function">test</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token keyword">this</span><span class="token punctuation">,</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>object<span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// window</span>
-
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>object<span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>object<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 依然是 window</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>优势</strong>：简化加载状态管理，提升用户体验。</p>
+<hr>
+<h2 id="六、迁移建议与实践策略"><a href="#六、迁移建议与实践策略" class="headerlink" title="六、迁移建议与实践策略"></a>六、迁移建议与实践策略</h2><h3 id="6-1-渐进式升级路径"><a href="#6-1-渐进式升级路径" class="headerlink" title="6.1 渐进式升级路径"></a>6.1 渐进式升级路径</h3><ol>
+<li>使用 <strong>@vue&#x2F;compat</strong> 库实现双向兼容模式</li>
+<li>逐步替换废弃 API（如 <code>Filters</code>）</li>
+<li>优先迁移高频使用组件</li>
+</ol>
+<h3 id="6-2-工具链支持"><a href="#6-2-工具链支持" class="headerlink" title="6.2 工具链支持"></a>6.2 工具链支持</h3><ul>
+<li><strong>Vue CLI Migration Build</strong>：检测兼容性问题</li>
+<li><strong>eslint-plugin-vue</strong>：自动修复语法差异</li>
+</ul>
+<hr>
+<h2 id="七、总结"><a href="#七、总结" class="headerlink" title="七、总结"></a>七、总结</h2><p>Vue 3.0 通过 <strong>组合式 API</strong>、<strong>Proxy 响应式系统</strong> 和 <strong>模块化架构</strong> 实现了全面进化。其优势体现在：</p>
+<ul>
+<li><strong>性能</strong>：渲染速度提升 1.2-2 倍</li>
+<li><strong>维护性</strong>：代码可读性提高 50%</li>
+<li><strong>扩展性</strong>：自定义渲染器支持 WebGL&#x2F;Canvas 等场景</li>
+</ul>
+<p>对于新项目，建议直接采用 Vue 3.0；老项目可根据复杂度评估逐步迁移。随着生态的完善（如 VitePress、Pinia），Vue 3.0 正在成为现代 Web 开发的首选框架。</p>
 
                 
             </div>
@@ -499,7 +523,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://theinlaidharp.github.io/2017/02/20/%E6%B5%85%E6%9E%90%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0/">https://theinlaidharp.github.io/2017/02/20/%E6%B5%85%E6%9E%90%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0/</a>
+                    <a href="https://theinlaidharp.github.io/2023/10/29/Vue2-0-%E4%B8%8E-Vue3-0-%E6%B7%B1%E5%BA%A6%E5%AF%B9%E6%AF%94%EF%BC%9A%E4%BB%8E%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%88%B0%E5%BC%80%E5%8F%91%E5%AE%9E%E8%B7%B5/">https://theinlaidharp.github.io/2023/10/29/Vue2-0-%E4%B8%8E-Vue3-0-%E6%B7%B1%E5%BA%A6%E5%AF%B9%E6%AF%94%EF%BC%9A%E4%BB%8E%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%88%B0%E5%BC%80%E5%8F%91%E5%AE%9E%E8%B7%B5/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -541,8 +565,16 @@ console<span class="token punctuation">.</span><span class="token function">log<
                                     <span class="chip bg-color">javascript</span>
                                 </a>
                             
-                                <a href="/tags/ES6/">
-                                    <span class="chip bg-color">ES6</span>
+                                <a href="/tags/Vue/">
+                                    <span class="chip bg-color">Vue</span>
+                                </a>
+                            
+                                <a href="/tags/Vite/">
+                                    <span class="chip bg-color">Vite</span>
+                                </a>
+                            
+                                <a href="/tags/Webpack/">
+                                    <span class="chip bg-color">Webpack</span>
                                 </a>
                             
                         </div>
@@ -621,9 +653,72 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2023/10/29/Vue2-0-%E4%B8%8E-Vue3-0-%E6%B7%B1%E5%BA%A6%E5%AF%B9%E6%AF%94%EF%BC%9A%E4%BB%8E%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%88%B0%E5%BC%80%E5%8F%91%E5%AE%9E%E8%B7%B5/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="Vue2.0 与 Vue3.0 深度对比：从核心原理到开发实践">
+                        
+                        <span class="card-title">Vue2.0 与 Vue3.0 深度对比：从核心原理到开发实践</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-10-29
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%89%8D%E7%AB%AF/" class="post-category">
+                                    前端
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/javascript/">
+                        <span class="chip bg-color">javascript</span>
+                    </a>
+                    
+                    <a href="/tags/Vue/">
+                        <span class="chip bg-color">Vue</span>
+                    </a>
+                    
+                    <a href="/tags/Vite/">
+                        <span class="chip bg-color">Vite</span>
+                    </a>
+                    
+                    <a href="/tags/Webpack/">
+                        <span class="chip bg-color">Webpack</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
             <div class="card">
                 <a href="/2022/10/14/Webpack5-0-%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/">
                     <div class="card-image">
@@ -640,9 +735,9 @@ console<span class="token punctuation">.</span><span class="token function">log<
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-10-14
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-10-14
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -664,59 +759,6 @@ console<span class="token punctuation">.</span><span class="token function">log<
                     
                     <a href="/tags/Webpack/">
                         <span class="chip bg-color">Webpack</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2016/11/22/hello-world/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
-                        
-                        <span class="card-title">Hello World</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2016-11-22
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E5%8D%9A%E5%AE%A2%E5%B7%A5%E5%85%B7/" class="post-category">
-                                    博客工具
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/hello/">
-                        <span class="chip bg-color">hello</span>
-                    </a>
-                    
-                    <a href="/tags/blog/">
-                        <span class="chip bg-color">blog</span>
                     </a>
                     
                 </div>

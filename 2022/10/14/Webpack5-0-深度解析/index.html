@@ -4,16 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="浅析 ES6 中的箭头函数, 锦瑟 丨 Blog">
-    <meta name="description" content="定义：箭头函数是 ES6 中的表达函数的写法。即：用箭头定义函数 () &amp;#x3D;&amp;gt; a + b
-通常我们定义 JS 中的函数时是这么定义的
-ES5：
-
-function (a) &amp;#123;
-	return a;
-&amp;#125;
-
-">
+    <meta name="keywords" content="Webpack5.0 深度解析, 锦瑟 丨 Blog">
+    <meta name="description" content="一、Webpack 5.0 的核心架构升级1.1 持久化缓存机制Webpack 5 引入 文件系统级缓存（cache: &amp;#123; type: &amp;#39;filesystem&amp;#39; &amp;#125;），通过确定性的模块 ID、Chunk ">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -25,7 +17,7 @@ function (a) &amp;#123;
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>浅析 ES6 中的箭头函数 | 锦瑟 丨 Blog</title>
+    <title>Webpack5.0 深度解析 | 锦瑟 丨 Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -235,12 +227,12 @@ function (a) &amp;#123;
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/22.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/18.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">浅析 ES6 中的箭头函数</h1>
+                    <h1 class="description center-align post-title">Webpack5.0 深度解析</h1>
                 </div>
             </div>
         </div>
@@ -268,8 +260,8 @@ function (a) &amp;#123;
                                 <span class="chip bg-color">javascript</span>
                             </a>
                         
-                            <a href="/tags/ES6/">
-                                <span class="chip bg-color">ES6</span>
+                            <a href="/tags/Webpack/">
+                                <span class="chip bg-color">Webpack</span>
                             </a>
                         
                     </div>
@@ -293,7 +285,7 @@ function (a) &amp;#123;
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2017-02-20
+                    2022-10-14
                 </div>
                 
 
@@ -302,7 +294,7 @@ function (a) &amp;#123;
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1k
+                    768
                 </div>
                 
 
@@ -327,152 +319,104 @@ function (a) &amp;#123;
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p><strong>定义：箭头函数是 ES6 中的表达函数的写法。即：用箭头定义函数 () &#x3D;&gt; a + b</strong></p>
-<p>通常我们定义 JS 中的函数时是这么定义的</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token constant">ES5</span>：
-
-<span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">a</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-	<span class="token keyword">return</span> a<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-
-<span class="token comment">// 输出结果：a</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>这种写法我们已经习以为常了，但是总感觉这种写法太冗长了，那有没有一种方法用一行代码就能表达清楚的呢？答案当然是：<strong>有！</strong></p>
-<p><strong>在 ES6 中新增加了一种定义函数的方法：箭头函数。写起来简单明了。如下：</strong></p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token constant">ES6</span><span class="token function">：</span>
-
-<span class="token punctuation">(</span><span class="token parameter">a</span><span class="token punctuation">)</span> <span class="token operator">=></span> a<span class="token punctuation">;</span>
-
-<span class="token comment">// 输出结果：a</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>这样看着是不是就简洁的多了呢，不仅把 function 、 return 关键字省略了，连大括号 小括号都不用写了。有人问了：我都没写 return 关键字，它是怎么知道我要把 a 返回出来呢？那是因为箭头函数默认将箭头后面的代码 return 出来。（注意：这种机制仅限于单行代码）</p>
-<p><strong>那么问题来了，这是一个有参数的函数，而且只有一个参数。如果我要写没有参数或者有多个参数的函数该怎么写呢？</strong></p>
-<p><em>for example:</em></p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token constant">ES5</span>：
-
- <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token punctuation">,</span> b</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
- 	<span class="token keyword">return</span> a <span class="token operator">+</span> b<span class="token punctuation">;</span>
- <span class="token punctuation">&#125;</span>
-
- <span class="token comment">// 输出结果： a + b</span>
-
-
- <span class="token constant">ES6</span><span class="token function">：</span>
-
- <span class="token punctuation">(</span><span class="token parameter">a<span class="token punctuation">,</span> b</span><span class="token punctuation">)</span> <span class="token operator">=></span> a <span class="token operator">+</span> b
-
- <span class="token comment">// 输出结果： a + b</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>只需要在箭头前面加一个括号，在括号里面写上要传入的参数并用逗号将参数分割就行。依然很简洁！</p>
-<p>当然了，这只是最简洁的函数，箭头函数有两种表达格式，一种就是上面的，只包含一个表达式，如果表达式比较复杂怎么办呢？这时就不能再省略 {} 和 return 啦。</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token constant">ES5</span>：
-
-<span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">a</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-	<span class="token keyword">if</span> <span class="token punctuation">(</span>a <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-		<span class="token keyword">return</span> a<span class="token punctuation">;</span>
-	<span class="token punctuation">&#125;</span><span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
-		<span class="token keyword">return</span> <span class="token operator">-</span> a<span class="token punctuation">;</span>
-	<span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span>
-
-<span class="token comment">// 输出结果： a or - a</span>
-
-<span class="token constant">ES6</span>：
-
-<span class="token parameter">a</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
-	<span class="token keyword">if</span> <span class="token punctuation">(</span>a <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-		<span class="token keyword">return</span> a<span class="token punctuation">;</span>
-	<span class="token punctuation">&#125;</span><span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
-		<span class="token keyword">return</span> <span class="token operator">-</span> a<span class="token punctuation">;</span>
-	<span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span>
-
-<span class="token comment">// 输出结果： a or - a</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>这是单个参数的写法，如果是多个参数或者无参数，同样在 &#x3D;&gt; 前面加上 (option1, option2) 就行啦。</p>
-<p>箭头函数中有一种特殊情况： 如果要返回一个对象，那么就要注意，这么写的会报错</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token punctuation">(</span><span class="token parameter">a</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
-  <span class="token literal-property property">name</span><span class="token operator">:</span> TheInlaidHarp<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-
-<span class="token comment">// SyntaxError</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>因为这样写和函数体的 {…} 有语法冲突，所以要改为</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token punctuation">(</span><span class="token parameter">a</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">(</span><span class="token punctuation">&#123;</span> <span class="token literal-property property">name</span><span class="token operator">:</span> TheInlaidHarp <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token comment">// OK</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<p>到这个地方整体看起来箭头函数与之前的函数也没有太大的区别，别急！下面就介绍一下箭头函数与普通的函数最大区别，也就是箭头函数的特性：</p>
-<p>箭头函数对 this 的处理方法与普通的函数是不一样的，我们通过一个例子来理解</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> object <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
-  <span class="token literal-property property">number</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
-
-  <span class="token function-variable function">fn</span><span class="token operator">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>number<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <h2 id="一、Webpack-5-0-的核心架构升级"><a href="#一、Webpack-5-0-的核心架构升级" class="headerlink" title="一、Webpack 5.0 的核心架构升级"></a>一、Webpack 5.0 的核心架构升级</h2><h3 id="1-1-持久化缓存机制"><a href="#1-1-持久化缓存机制" class="headerlink" title="1.1 持久化缓存机制"></a>1.1 持久化缓存机制</h3><p>Webpack 5 引入 <strong>文件系统级缓存</strong>（<code>cache: &#123; type: &#39;filesystem&#39; &#125;</code>），通过确定性的模块 ID、Chunk ID 和导出哈希值，实现构建结果的长期缓存。该特性使得二次构建速度提升 <strong>70%</strong>，内存占用降低 <strong>40%</strong>。</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// webpack.config.js</span>
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  <span class="token literal-property property">cache</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">type</span><span class="token operator">:</span> <span class="token string">"filesystem"</span><span class="token punctuation">,</span> <span class="token comment">// 启用文件系统缓存</span>
+    <span class="token literal-property property">buildDependencies</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+      <span class="token literal-property property">config</span><span class="token operator">:</span> <span class="token punctuation">[</span>__filename<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token comment">// 当配置文件变更时自动失效缓存</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
   <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-  <span class="token function-variable function">test</span><span class="token operator">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-      <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">fn</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<h3 id="1-2-模块联邦（Module-Federation）"><a href="#1-2-模块联邦（Module-Federation）" class="headerlink" title="1.2 模块联邦（Module Federation）"></a>1.2 模块联邦（Module Federation）</h3><p>支持跨应用的代码共享，实现微前端架构的无缝集成。通过 <strong>exposes&#x2F;remotes</strong> 配置，可在运行时动态加载远程模块：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// 应用A 暴露模块</span>
+<span class="token keyword">new</span> <span class="token class-name">ModuleFederationPlugin</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+  <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"app1"</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">filename</span><span class="token operator">:</span> <span class="token string">"remoteEntry.js"</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">exposes</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span> <span class="token string-property property">"./Button"</span><span class="token operator">:</span> <span class="token string">"./src/Button.js"</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 应用B 引用远程模块</span>
+<span class="token keyword">import</span> Button <span class="token keyword">from</span> <span class="token string">"app1/Button"</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="1-3-构建性能优化"><a href="#1-3-构建性能优化" class="headerlink" title="1.3 构建性能优化"></a>1.3 构建性能优化</h3><ul>
+<li><strong>Tree Shaking 增强</strong>：支持嵌套模块的副作用分析，未使用的导出内容会被安全移除</li>
+<li><strong>NPM 包优化</strong>：自动跳过未修改的依赖项构建（通过 <code>package.json</code> 的 <code>sideEffects</code> 标记）</li>
+</ul>
+<hr>
+<h2 id="二、开发体验提升"><a href="#二、开发体验提升" class="headerlink" title="二、开发体验提升"></a>二、开发体验提升</h2><h3 id="2-1-模块热替换（HMR）优化"><a href="#2-1-模块热替换（HMR）优化" class="headerlink" title="2.1 模块热替换（HMR）优化"></a>2.1 模块热替换（HMR）优化</h3><p>基于 <strong>WebSocket</strong> 的热更新机制实现秒级代码替换，保留应用状态的同时完成局部更新。核心流程：</p>
+<ol>
+<li>文件变动后，Webpack Dev Server 推送更新消息</li>
+<li>客户端下载更新后的 Chunk</li>
+<li>执行 <code>module.hot.accept</code> 回调完成组件热替换</li>
+</ol>
+<h3 id="2-2-增强的-TypeScript-支持"><a href="#2-2-增强的-TypeScript-支持" class="headerlink" title="2.2 增强的 TypeScript 支持"></a>2.2 增强的 TypeScript 支持</h3><p>内置 <strong>tsconfig.json</strong> 路径解析，支持 <code>compilerOptions</code> 的 <code>paths</code> 配置，无需额外插件即可实现别名引用：</p>
+<pre class="line-numbers language-typescript" data-language="typescript"><code class="language-typescript"><span class="token keyword">import</span> <span class="token punctuation">&#123;</span> utils <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">"@shared/utils"</span><span class="token punctuation">;</span> <span class="token comment">// 直接映射到src/shared/utils.ts</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<hr>
+<h2 id="三、核心配置与实战技巧"><a href="#三、核心配置与实战技巧" class="headerlink" title="三、核心配置与实战技巧"></a>三、核心配置与实战技巧</h2><h3 id="3-1-基础配置模板"><a href="#3-1-基础配置模板" class="headerlink" title="3.1 基础配置模板"></a>3.1 基础配置模板</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"path"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> HtmlWebpackPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"html-webpack-plugin"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  <span class="token literal-property property">entry</span><span class="token operator">:</span> <span class="token string">"./src/index.ts"</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">output</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">filename</span><span class="token operator">:</span> <span class="token string">"[name].[contenthash].js"</span><span class="token punctuation">,</span> <span class="token comment">// 内容哈希命名</span>
+    <span class="token literal-property property">path</span><span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">"dist"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
   <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-
-object<span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token comment">// this.fn is not a function</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>这样写会报错的原因就是：test 函数里面的函数调用的时候 this 是指向全局的。那么怎么才能让这个 this 指向 object 呢？我们来修改一下代码</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> object <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
-  <span class="token literal-property property">number</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
-
-  <span class="token function-variable function">fn</span><span class="token operator">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>number<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token literal-property property">module</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">rules</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+      <span class="token punctuation">&#123;</span>
+        <span class="token literal-property property">test</span><span class="token operator">:</span> <span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">\.tsx?$</span><span class="token regex-delimiter">/</span></span><span class="token punctuation">,</span>
+        <span class="token literal-property property">use</span><span class="token operator">:</span> <span class="token string">"ts-loader"</span><span class="token punctuation">,</span> <span class="token comment">// TypeScript编译</span>
+        <span class="token literal-property property">exclude</span><span class="token operator">:</span> <span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">node_modules</span><span class="token regex-delimiter">/</span></span><span class="token punctuation">,</span>
+      <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+      <span class="token punctuation">&#123;</span>
+        <span class="token literal-property property">test</span><span class="token operator">:</span> <span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">\.(png|svg)$</span><span class="token regex-delimiter">/</span></span><span class="token punctuation">,</span>
+        <span class="token literal-property property">type</span><span class="token operator">:</span> <span class="token string">"asset/resource"</span><span class="token punctuation">,</span> <span class="token comment">// 资源模块处理</span>
+      <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">plugins</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token keyword">new</span> <span class="token class-name">HtmlWebpackPlugin</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span> <span class="token literal-property property">template</span><span class="token operator">:</span> <span class="token string">"./src/index.html"</span> <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-  <span class="token function-variable function">test</span><span class="token operator">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">var</span> _this <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+<h3 id="3-2-性能优化配置"><a href="#3-2-性能优化配置" class="headerlink" title="3.2 性能优化配置"></a>3.2 性能优化配置</h3><h4 id="代码分割（Code-Splitting）"><a href="#代码分割（Code-Splitting）" class="headerlink" title="代码分割（Code Splitting）"></a>代码分割（Code Splitting）</h4><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token literal-property property">optimization</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+  <span class="token literal-property property">splitChunks</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">chunks</span><span class="token operator">:</span> <span class="token string">'all'</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">minSize</span><span class="token operator">:</span> <span class="token number">20000</span><span class="token punctuation">,</span> <span class="token comment">// 20KB以上才分割</span>
+    <span class="token literal-property property">cacheGroups</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+      <span class="token literal-property property">vendors</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+        <span class="token literal-property property">test</span><span class="token operator">:</span> <span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">[\\/]node_modules[\\/]</span><span class="token regex-delimiter">/</span></span><span class="token punctuation">,</span>
+        <span class="token literal-property property">priority</span><span class="token operator">:</span> <span class="token operator">-</span><span class="token number">10</span> <span class="token comment">// 优先提取第三方库</span>
+      <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-    <span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-      _this<span class="token punctuation">.</span><span class="token function">fn</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<h4 id="资源压缩"><a href="#资源压缩" class="headerlink" title="资源压缩"></a>资源压缩</h4><p>通过 <strong>compression-webpack-plugin</strong> 实现 GZIP 预压缩：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">new</span> <span class="token class-name">CompressionPlugin</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+  <span class="token literal-property property">filename</span><span class="token operator">:</span> <span class="token string">"[path][base].gz"</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">algorithm</span><span class="token operator">:</span> <span class="token string">"gzip"</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">threshold</span><span class="token operator">:</span> <span class="token number">10240</span><span class="token punctuation">,</span> <span class="token comment">// 10KB以上才压缩</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-object<span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token comment">// 1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><strong>我们在外部定义一个变量 _this 来保存 this 就 OK 啦！</strong></p>
-<p>我们刚才说过：在箭头函数里面对 this 的处理方法是不一样的，箭头函数的 this 始终指向函数定义的 this ，而非函数调用时的 this 。所以我们将上面的代码用箭头函数表达</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> object <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
-  <span class="token literal-property property">number</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
-
-  <span class="token function-variable function">fn</span><span class="token operator">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>number<span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-
-  <span class="token function-variable function">test</span><span class="token operator">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">fn</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-
-object<span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token comment">// 1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>所以这次的函数执行结果的 this 指向依然是 object;</p>
-<p>但是我们要注意的是：箭头函数里的 this 指向是不会改变指向对象的。我们知道 javascript 中的 call 和 apply 方法可以改变 this 指向，但是这两个方法在箭头函数中是无效的。</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> number <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
-<span class="token keyword">var</span> object <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
-  <span class="token literal-property property">x</span><span class="token operator">:</span> <span class="token number">10</span><span class="token punctuation">,</span>
-
-  <span class="token function-variable function">test</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token keyword">this</span><span class="token punctuation">,</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>object<span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// window</span>
-
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>object<span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>object<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 依然是 window</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<hr>
+<h2 id="四、迁移指南与常见问题"><a href="#四、迁移指南与常见问题" class="headerlink" title="四、迁移指南与常见问题"></a>四、迁移指南与常见问题</h2><h3 id="4-1-从-Webpack-4-升级要点"><a href="#4-1-从-Webpack-4-升级要点" class="headerlink" title="4.1 从 Webpack 4 升级要点"></a>4.1 从 Webpack 4 升级要点</h3><ol>
+<li><strong>Node.js 版本</strong>：需 ≥10.13.0（推荐 14+）</li>
+<li><strong>废弃功能</strong>：<ul>
+<li>移除 <code>url-loader/file-loader</code>，改用 <code>type: &#39;asset&#39;</code> 资源类型</li>
+<li>不再自动注入 Node 核心模块 polyfill，需手动安装 <code>core-js</code></li>
+</ul>
+</li>
+</ol>
+<h3 id="4-2-调试技巧"><a href="#4-2-调试技巧" class="headerlink" title="4.2 调试技巧"></a>4.2 调试技巧</h3><ul>
+<li><strong>构建分析</strong>：使用 <code>webpack-bundle-analyzer</code> 查看模块体积分布</li>
+<li><strong>性能追踪</strong>：在 Chrome DevTools 的 Performance 面板记录构建过程</li>
+</ul>
+<hr>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>Webpack 5 的 <strong>Rspack 集成</strong>（基于 Rust 的构建引擎）正在测试中，预计可将构建速度再提升 <strong>3-5 倍</strong>。同时，<strong>模块联邦 2.0</strong> 将支持动态运行时依赖加载，进一步简化微前端架构。</p>
+<hr>
 
                 
             </div>
@@ -499,7 +443,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://theinlaidharp.github.io/2017/02/20/%E6%B5%85%E6%9E%90%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0/">https://theinlaidharp.github.io/2017/02/20/%E6%B5%85%E6%9E%90%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0/</a>
+                    <a href="https://theinlaidharp.github.io/2022/10/14/Webpack5-0-%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/">https://theinlaidharp.github.io/2022/10/14/Webpack5-0-%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -541,8 +485,8 @@ console<span class="token punctuation">.</span><span class="token function">log<
                                     <span class="chip bg-color">javascript</span>
                                 </a>
                             
-                                <a href="/tags/ES6/">
-                                    <span class="chip bg-color">ES6</span>
+                                <a href="/tags/Webpack/">
+                                    <span class="chip bg-color">Webpack</span>
                                 </a>
                             
                         </div>
@@ -625,12 +569,13 @@ console<span class="token punctuation">.</span><span class="token function">log<
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2022/10/14/Webpack5-0-%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/">
+                <a href="/2023/10/29/Vue2-0-%E4%B8%8E-Vue3-0-%E6%B7%B1%E5%BA%A6%E5%AF%B9%E6%AF%94%EF%BC%9A%E4%BB%8E%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%88%B0%E5%BC%80%E5%8F%91%E5%AE%9E%E8%B7%B5/">
                     <div class="card-image">
                         
-                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="Webpack5.0 深度解析">
                         
-                        <span class="card-title">Webpack5.0 深度解析</span>
+                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="Vue2.0 与 Vue3.0 深度对比：从核心原理到开发实践">
+                        
+                        <span class="card-title">Vue2.0 与 Vue3.0 深度对比：从核心原理到开发实践</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -641,7 +586,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-10-14
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-10-29
                         </span>
                         <span class="publish-author">
                             
@@ -662,6 +607,14 @@ console<span class="token punctuation">.</span><span class="token function">log<
                         <span class="chip bg-color">javascript</span>
                     </a>
                     
+                    <a href="/tags/Vue/">
+                        <span class="chip bg-color">Vue</span>
+                    </a>
+                    
+                    <a href="/tags/Vite/">
+                        <span class="chip bg-color">Vite</span>
+                    </a>
+                    
                     <a href="/tags/Webpack/">
                         <span class="chip bg-color">Webpack</span>
                     </a>
@@ -677,13 +630,13 @@ console<span class="token punctuation">.</span><span class="token function">log<
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2016/11/22/hello-world/">
+                <a href="/2017/02/20/%E6%B5%85%E6%9E%90%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
+                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="浅析 ES6 中的箭头函数">
                         
-                        <span class="card-title">Hello World</span>
+                        <span class="card-title">浅析 ES6 中的箭头函数</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -694,14 +647,14 @@ console<span class="token punctuation">.</span><span class="token function">log<
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2016-11-22
+                                <i class="far fa-clock fa-fw icon-date"></i>2017-02-20
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E5%8D%9A%E5%AE%A2%E5%B7%A5%E5%85%B7/" class="post-category">
-                                    博客工具
+                            <a href="/categories/%E5%89%8D%E7%AB%AF/" class="post-category">
+                                    前端
                                 </a>
                             
                             
@@ -711,12 +664,12 @@ console<span class="token punctuation">.</span><span class="token function">log<
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/hello/">
-                        <span class="chip bg-color">hello</span>
+                    <a href="/tags/javascript/">
+                        <span class="chip bg-color">javascript</span>
                     </a>
                     
-                    <a href="/tags/blog/">
-                        <span class="chip bg-color">blog</span>
+                    <a href="/tags/ES6/">
+                        <span class="chip bg-color">ES6</span>
                     </a>
                     
                 </div>
